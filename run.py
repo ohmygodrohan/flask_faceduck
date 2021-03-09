@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session, url_for,flash
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Heya#123@localhost/Bucketlist'
+app.config['SECRET_KEY'] = 'ic34rv7 g7'
 db = SQLAlchemy(app)
 
 class Duck(db.Model):
@@ -17,8 +19,8 @@ class Duck(db.Model):
     gender = db.Column(db.String(120), unique=False, nullable=False)
 
 
-@app.route('/signup',methods=['POST','GET'])
-def signup():
+@app.route('/signupdb',methods=['POST','GET'])
+def signupdb():
    if request.method == 'POST':
     _name = request.form['idname']
     _username = request.form['idusername']
@@ -30,12 +32,40 @@ def signup():
     db.session.commit()
     return render_template('login.html')
 
-@app.route('/')
-def sign():
+@app.route('/signup')
+def signup():
     return render_template('signup.html')
 
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/')
+def base():
+    if 'username' in session:
+        return render_template('home.html')
+    else:
+        return render_template('home.html')
+
+@app.route('/logindb', methods = ['GET','POST'])
+def logindb():
+    if request.method == 'POST':
+        name = request.form['username']
+        password = request.form['password']
+        data = Duck.query.filter_by(username=name,password=password).first()
+        if data is not None:
+            session['logged_in']=True
+            session['username']= name
+            return redirect(url_for('base'))
+        else:
+            return redirect(url_for('login'))
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session['logged_in'] = False
+    return redirect(url_for('base'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
