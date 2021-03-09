@@ -9,7 +9,9 @@
     USERNAME:<input type="text" name="username"><br>
     PASSWORD:<input type="password" name="password"><br>
     <input type="submit" value="LOGIN">
-
+    {% for mesg in get_flashed_messages() %}
+    <span style="color:red">{{ mesg }}</span>
+    {% endfor %}
 </form>
 <p>new user? <a href="/signup">signup here</a></p>
 {% endblock %}

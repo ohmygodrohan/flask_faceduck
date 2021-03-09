@@ -56,8 +56,9 @@ def logindb():
         if data is not None:
             session['logged_in']=True
             session['username']= name
-            return redirect(url_for('base'))
+            return redirect(url_for('dash'))
         else:
+            flash('invalid credentials')
             return redirect(url_for('login'))
 
 @app.route('/logout')
@@ -66,6 +67,9 @@ def logout():
     session['logged_in'] = False
     return redirect(url_for('base'))
 
+@app.route('/dashboard')
+def dash():
+    return render_template('dashboard.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
