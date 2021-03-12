@@ -16,8 +16,11 @@
     <a class="p-2 text-dark" href="/" title="Home">Home</a>
         {% if session['logged_in'] %}
           <a class="p-2 text-dark" href="/dashboard">Dashboard</a>
+          <a class="p-2 text-dark" href="{{ url_for('blog')}}">Add Blog</a>
+          <a class="p-2 text-dark" href="{{ url_for('mycontent') }}">My Content</a>
           <a class="p-2 text-dark" href="/logout">Logout</a>
         {% else %}
+          <a class="p-2 text-dark" href="/dashboard">Dashboard</a>
           <a class="p-2 text-dark" href="/login">Log In/Register</a>
         {% endif %}
 </nav>

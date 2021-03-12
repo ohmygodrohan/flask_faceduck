@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}ADD BLOG {% endblock %}
+
+{% block content %}
+
+<form method="post" action="{{url_for('blogprocess')}}">
+    <center><h1>BLOG</h1></center>
+    TITLE:<input type="text" name="title"><br>
+    CONTENT:<textarea name = 'content' rows="10" cols="25"></textarea><br>
+    <input type="submit" value="POST">
+
+</form>
+{% endblock %}

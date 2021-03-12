@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, url_for,flash
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 import pymysql
 
 
@@ -18,6 +19,13 @@ class Duck(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)
     gender = db.Column(db.String(120), unique=False, nullable=False)
 
+class Blog(db.Model):
+    __tablename__ = 'blogpost'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(120), unique=True, nullable=False)
+    title = db.Column(db.String(20),nullable = False)
+    date_posted = db.Column(db.DateTime,nullable = False,default=datetime.utcnow)
+    content = db.Column(db.String(20),nullable = False,)
 
 @app.route('/signupdb',methods=['POST','GET'])
 def signupdb():
@@ -55,7 +63,7 @@ def logindb():
         data = Duck.query.filter_by(username=name,password=password).first()
         if data is not None:
             session['logged_in']=True
-            session['username']= name
+            session['username']=name
             return redirect(url_for('dash'))
         else:
             flash('invalid credentials')
@@ -69,7 +77,46 @@ def logout():
 
 @app.route('/dashboard')
 def dash():
-    return render_template('dashboard.html')
+    post = Blog.query.order_by(Blog.date_posted.desc())
+    return render_template('dashboard.html',post=post)
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
+
+@app.route('/blogprocess', methods = ['POST','GET'])
+def blogprocess():
+    if request.method =='POST':
+        title = request.form['title']
+        content = request.form['content']
+        entry = Blog(title=title,content=content,username=session['username'])
+        db.session.add(entry)
+        db.session.commit()
+        return redirect(url_for('dash'))
+    else:
+        return redirect(url_for('blogprocess'))
+
+@app.route('/mycontent')
+def mycontent():
+    a = Blog.query.filter(Blog.username == session['username']).order_by(Blog.date_posted.desc())
+    return render_template('mycontent.html',data=a)
+
+
+@app.route('/blogedit', methods=['GET','POST'])
+def blogedit():
+    title = request.args.get('title')
+    content = request.args.get('content')
+    id = request.args.get('id')
+    return render_template('edit.html',title=title,id=id,content=content)
+
+
+@app.route('/editblog')
+def blogupdate():
+    pass
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

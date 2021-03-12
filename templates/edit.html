@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}EDIT BLOG{% endblock %}
+
+{% block content %}
+
+<form method="post" action="{{url_for('blogupdate')}}">
+    <center><h1>EDIT BLOG</h1></center>
+    TITLE:<input type="text" name="title" value="{{ title }}"><br>
+    CONTENT:<textarea name = 'content' rows="10" cols="25" >{{content}}</textarea><br>
+    <input type="submit" value="UPDATE">
+
+</form>
+{% endblock %}

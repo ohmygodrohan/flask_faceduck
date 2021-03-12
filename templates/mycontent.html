@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}DASHBOARD{% endblock %}
+{% block title %}MYCONTENT{% endblock %}
 
 {% block content %}
-{% for part in post %}
+{% for part in data %}
     <div>
         <h3>TITLE: {{part.title}} </h3>
         <h4>AUTHOR: {{part.username}} </h4>
         <p>CONTENT: {{part.content}}</p>
         <h6>DATE: {{part.date_posted}}</h6>
-        <hr>
 
+        <a href="{{ url_for('blogedit',title=part.title,content=part.content,id=part.id) }}">EDIT POST</a>
+        <hr>
     </div>
 {% endfor %}
 {% endblock %}
