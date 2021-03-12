@@ -5,7 +5,7 @@ import pymysql
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:pepo@localhost/Bucketlist'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Heya#123@localhost/Bucketlist'
 app.config['SECRET_KEY'] = 'ic34rv7 g7'
 db = SQLAlchemy(app)
 
