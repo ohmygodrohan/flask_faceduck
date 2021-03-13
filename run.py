@@ -47,13 +47,6 @@ def signup():
 @app.route('/login')
 def login():
     return render_template('login.html')
-"""
-@app.route('/')
-def base():
-    if 'username' in session:
-        return render_template('home.html')
-    else:
-        return render_template('dashboard.html')"""
 
 @app.route('/logindb', methods = ['GET','POST'])
 def logindb():
@@ -73,7 +66,7 @@ def logindb():
 def logout():
     session.pop('username', None)
     session['logged_in'] = False
-    return redirect(url_for('base'))
+    return redirect(url_for('dash'))
 
 @app.route('/')
 def dash():
