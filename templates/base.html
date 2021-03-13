@@ -15,12 +15,12 @@
 <nav>
     <a class="p-2 text-dark" href="/" title="Home">Home</a>
         {% if session['logged_in'] %}
-          <a class="p-2 text-dark" href="/dashboard">Dashboard</a>
+          <a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a>
           <a class="p-2 text-dark" href="{{ url_for('blog')}}">Add Blog</a>
           <a class="p-2 text-dark" href="{{ url_for('mycontent') }}">My Content</a>
           <a class="p-2 text-dark" href="/logout">Logout</a>
         {% else %}
-          <a class="p-2 text-dark" href="/dashboard">Dashboard</a>
+          <a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a>
           <a class="p-2 text-dark" href="/login">Log In/Register</a>
         {% endif %}
 </nav>
@@ -30,8 +30,9 @@
     {% endblock %}
 </div>
 
+    <div style="position: absolute; bottom: 5px;">
+    BUILD BY RAJESH SINGH USING PYTHON-FLASK MICRO FRAMEWORK   Copyright 2021 &copy; RAJESH SINGH
 
-<footer class="text-center">Created by <a href="#">RAJESH SINGH</a>, built using <a href="#">PYTHON-FLASK</a>
 
 </body>
 </html>
