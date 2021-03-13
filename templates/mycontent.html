@@ -3,15 +3,23 @@
 {% block title %}MYCONTENT{% endblock %}
 
 {% block content %}
-{% for part in data %}
-    <div>
+{% if data %}
+    {% for part in data %}
+        <div>
         <h3>TITLE: {{part.title}} </h3>
         <h4>AUTHOR: {{part.username}} </h4>
         <p>CONTENT: {{part.content}}</p>
         <h6>DATE: {{part.date_posted}}</h6>
 
-        <a href="{{ url_for('blogedit',title=part.title,content=part.content,id=part.id) }}">EDIT POST</a>
+        <a href="{{ url_for('blogedit',id=part.id) }}">EDIT POST</a>
+        <a href="{{ url_for('deleteblog',id=part.id) }}">DELETE POST</a>
         <hr>
+        </div>
+    {% endfor %}
+
+{% else %}
+    <div>
+        <h3>YOU HAVENT POSTED ANYTHING YET </h3>
     </div>
-{% endfor %}
+{% endif %}
 {% endblock %}

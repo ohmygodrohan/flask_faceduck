@@ -77,7 +77,7 @@ def logout():
 
 @app.route('/dashboard')
 def dash():
-    post = Blog.query.order_by(Blog.date_posted.desc())
+    post = Blog.query.order_by(Blog.date_posted.desc()).all()
     return render_template('dashboard.html',post=post)
 
 @app.route('/blog')
@@ -99,21 +99,36 @@ def blogprocess():
 
 @app.route('/mycontent')
 def mycontent():
-    a = Blog.query.filter(Blog.username == session['username']).order_by(Blog.date_posted.desc())
+    a = Blog.query.filter(Blog.username == session['username']).order_by(Blog.date_posted.desc()).all()
     return render_template('mycontent.html',data=a)
-
 
 @app.route('/blogedit', methods=['GET','POST'])
 def blogedit():
-    title = request.args.get('title')
-    content = request.args.get('content')
     id = request.args.get('id')
-    return render_template('edit.html',title=title,id=id,content=content)
+    data = Blog.query.filter_by(id=id).first()
+
+    return render_template('edit.html',data=data)
 
 
-@app.route('/editblog')
+@app.route('/editblog',methods=['GET','POST'])
 def blogupdate():
-    pass
+    if request.method == 'POST':
+        item = Blog.query.get(request.form['id'])
+        item.title = request.form['title']
+        item.content = request.form['content']
+        item.date_posted=datetime.utcnow()
+        db.session.commit()
+        return redirect(url_for('mycontent'))
+    else:
+        return "error server are busy rn"
+
+
+@app.route('/delete',methods=['GET','POST'])
+def deleteblog():
+    Blog.query.filter_by(id=request.args.get('id')).delete()
+    db.session.commit()
+    return redirect(url_for('mycontent'))
+
 
 
 

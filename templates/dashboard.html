@@ -3,7 +3,8 @@
 {% block title %}DASHBOARD{% endblock %}
 
 {% block content %}
-{% for part in post %}
+{% if post %}
+    {% for part in post %}
     <div>
         <h3>TITLE: {{part.title}} </h3>
         <h4>AUTHOR: {{part.username}} </h4>
@@ -12,5 +13,8 @@
         <hr>
 
     </div>
-{% endfor %}
+    {% endfor %}
+{% else %}
+    <h2>NOTHING TO SEE HERE</h2>
+{% endif %}
 {% endblock %}
