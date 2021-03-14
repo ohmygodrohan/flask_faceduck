@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{{ url_for('static' , filename='basic.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<h1>FACEDUCK</h1>
-<p> {% if session['logged_in'] == True %}
-        welcome {{session['username']}}
+<h1 ><a href="#" class="logo">FACEDUCK</h1></a>
+<p class="name"> {% if session['logged_in'] == True %}
+    <b>welcome {{session['username']}} </b>
     {% else %}
-         welcome Guest
+       <b>  welcome Guest</b>
     {% endif %}
 </p>
 <div>
 <nav>
         {% if session['logged_in'] %}
-          <a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a>
-          <a class="p-2 text-dark" href="{{ url_for('blog')}}">Add Blog</a>
-          <a class="p-2 text-dark" href="{{ url_for('mycontent') }}">My Content</a>
-          <a class="p-2 text-dark" href="{{ url_for('logout') }}">Logout</a>
+        <ul>
+          <li><a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a></li>
+          <li><a class="p-2 text-dark" href="{{ url_for('blog')}}">Add Blog</a></li>
+          <li><a class="p-2 text-dark" href="{{ url_for('mycontent') }}">My Content</a></li>
+          <li><a class="p-2 text-dark" href="{{ url_for('logout') }}">Logout</a></li>
         {% else %}
-          <a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a>
-          <a class="p-2 text-dark" href="/login">Log In/Register</a>
+          <li><a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a></li>
+          <li><a class="p-2 text-dark" href="/login">Log In/Register</a></li>
+        </ul>
         {% endif %}
 </nav>
 </div>
@@ -29,9 +33,12 @@
     {% endblock %}
 </div>
 
-    <div style="position: absolute; bottom: 5px;">
-    BUILD BY RAJESH SINGH USING PYTHON-FLASK MICRO FRAMEWORK   Copyright 2021 &copy; RAJESH SINGH
+    <footer style="{ position:fixed;bottom:0; }">
+    BUILD BY RAJESH SINGH USING PYTHON-FLASK MICRO FRAMEWORK   Copyright 2021 &copy; RAJESH SINGH<br>
+        <a href="https://github.com/Rajeshsingh127"><i class="fa fa-github" style="font-size: 40px; margin: 20px;"></i></a>
+        <a href="https://www.linkedin.com/in/rajesh-singh-94aa76207/"><i class="fa fa-linkedin" style="font-size: 40px;"></i></a>
 
+    </footer>
 
 </body>
 </html>

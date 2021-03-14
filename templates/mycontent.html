@@ -3,13 +3,20 @@
 {% block title %}MYCONTENT{% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{category}}"> {{ message }} </div>
+            {% endfor %}
+        {% endif %}
+  {% endwith %}
 {% if data %}
     {% for part in data %}
-        <div>
-        <h3>TITLE: {{part.title}} </h3>
-        <h4>AUTHOR: {{part.username}} </h4>
-        <p>CONTENT: {{part.content}}</p>
-        <h6>DATE: {{part.date_posted}}</h6>
+        <div class="post">
+        <h3>{{part.title}} </h3>
+        <h5>by: {{part.username}} </h5>
+        <p>{{part.content}}</p>
+        <h6>{{part.date_posted}}</h6>
 
         <a href="{{ url_for('blogedit',id=part.id) }}">EDIT POST</a>
         <a href="{{ url_for('deleteblog',id=part.id) }}">DELETE POST</a>

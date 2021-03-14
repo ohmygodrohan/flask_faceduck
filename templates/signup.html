@@ -14,5 +14,12 @@
             <input type="radio" name = 'gender' value="female">Female<br>
     <input type="submit" name="idsubmit" value="SUBMIT">
 </form>
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{category}}"> {{ message }} </div>
+            {% endfor %}
+        {% endif %}
+  {% endwith %}<br>
 <p>already have an account <a href="/login">login here</a> </p>
 {% endblock %}

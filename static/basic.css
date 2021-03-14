@@ -1,0 +1,16 @@
+.blogadd{
+    color: green;
+
+}
+
+.warning{
+    color: red;
+
+}
+
+.post{
+    border-style: solid;
+    border-color: #c2c2a3;
+    background-color: #f5f5ef;
+    border-radius: 30px;
+}

@@ -36,9 +36,15 @@ def signupdb():
     _gender = request.form['gender']
     _password = request.form['idpassword']
     entry = Duck(email=_email,password=_password,username=_username,name=_name,gender=_gender)
-    db.session.add(entry)
-    db.session.commit()
-    return render_template('login.html')
+    try:
+        db.session.add(entry)
+        db.session.commit()
+        flash('account registered successfully','blogadd')
+        return render_template('login.html')
+    except:
+       flash('invalid credentials', 'warning')
+       return redirect(url_for('signup'))
+
 
 @app.route('/signup')
 def signup():
@@ -59,13 +65,14 @@ def logindb():
             session['username']=name
             return redirect(url_for('dash'))
         else:
-            flash('invalid credentials')
+            flash('invalid credentials','warning')
             return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     session['logged_in'] = False
+    flash('logged out','blogadd')
     return redirect(url_for('dash'))
 
 @app.route('/')
@@ -86,6 +93,7 @@ def blogprocess():
         entry = Blog(title=title,content=content,username=session['username'])
         db.session.add(entry)
         db.session.commit()
+        flash('Post added successfully','blogadd')
         return redirect(url_for('dash'))
     else:
         return redirect(url_for('blogprocess'))
@@ -111,15 +119,15 @@ def blogupdate():
         item.content = request.form['content']
         item.date_posted=datetime.utcnow()
         db.session.commit()
+        flash('post updated','blogadd')
         return redirect(url_for('mycontent'))
-    else:
-        return "error server are busy rn"
 
 
 @app.route('/delete',methods=['GET','POST'])
 def deleteblog():
     Blog.query.filter_by(id=request.args.get('id')).delete()
     db.session.commit()
+    flash('post deleted','blogadd')
     return redirect(url_for('mycontent'))
 
 
