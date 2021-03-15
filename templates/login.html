@@ -3,10 +3,11 @@
 {% block title %}HOME {% endblock %}
 
 {% block content %}
+<CENTER>
 <form method="post" action="/logindb">
-    <center><h1>LOGIN FORM</h1></center>
-    USERNAME:<input type="text" name="username"><br>
-    PASSWORD:<input type="password" name="password"><br>
+    <h2>LOGIN FORM</h2>
+    <input PLACEHOLDER="USERNAME" type="text" name="username"><br>
+    <input PLACEHOLDER="PASSWORD" type="password" name="password"><br>
     <input type="submit" value="LOGIN">
   {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -17,5 +18,5 @@
   {% endwith %}
 </form>
 <p>new user? <a href="/signup">signup here</a></p>
-
+</CENTER>
 {% endblock %}

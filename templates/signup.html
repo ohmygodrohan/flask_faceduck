@@ -3,14 +3,14 @@
 {% block title %}SIGNUP {% endblock %}
 
 {% block content %}
-
+<CENTER>
 <form method="post" action="{{url_for('signupdb')}}">
-<center><h1>SIGN UP FORM</h1></center>
-    Name:<input type="text" name="idname"><br>
-    username:<input type="text" name="idusername"><br>
-    Email:<input type="email" name="idemail"><br>
-    Password:<input type="password" name="idpassword"><br>
-    Gender:<input type="radio" name = 'gender' value="male">Male
+    <h1>SIGN UP FORM</h1>
+    <input placeholder="NAME" type="text" name="idname"><br>
+    <input placeholder="USERNAME" type="text" name="idusername"><br>
+    <input placeholder="EMAIL" type="email" name="idemail"><br>
+    <input placeholder="PASSWORD" type="password" name="idpassword"><br>
+    <input type="radio" name = 'gender' value="male">Male
             <input type="radio" name = 'gender' value="female">Female<br>
     <input type="submit" name="idsubmit" value="SUBMIT">
 </form>
@@ -22,4 +22,5 @@
         {% endif %}
   {% endwith %}<br>
 <p>already have an account <a href="/login">login here</a> </p>
+</CENTER>
 {% endblock %}

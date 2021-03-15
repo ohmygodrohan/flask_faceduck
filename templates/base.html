@@ -14,7 +14,6 @@
     {% endif %}
 </p>
 <div>
-<nav>
         {% if session['logged_in'] %}
         <ul>
           <li><a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a></li>
@@ -26,7 +25,7 @@
           <li><a class="p-2 text-dark" href="/login">Log In/Register</a></li>
         </ul>
         {% endif %}
-</nav>
+
 </div>
 <div>
     {% block content %}
