@@ -3,12 +3,13 @@
 {% block title %}ADD BLOG {% endblock %}
 
 {% block content %}
-
+<center>
 <form method="post" action="{{url_for('blogprocess')}}">
     <center><h1>BLOG</h1></center>
-    TITLE:<input type="text" name="title"><br>
-    CONTENT:<textarea name = 'content' rows="10" cols="25"></textarea><br>
+    <textarea placeholder="PUT YOUR CONTENT TITLE HERE" name="title" style="height: 70px;"></textarea><br>
+    <textarea PLACEHOLDER="PUT YOUR CONTENT HERE" name = 'content'></textarea><br>
     <input type="submit" value="POST">
 
 </form>
+</center>
 {% endblock %}

@@ -20,8 +20,10 @@
           <li><a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a></li>
           <li><a class="p-2 text-dark" href="{{ url_for('blog')}}">Add Blog</a></li>
           <li><a class="p-2 text-dark" href="{{ url_for('mycontent') }}">My Content</a></li>
-          <li><a class="p-2 text-dark" href="{{ url_for('logout') }}">Logout</a></li>
+          <li><a class="p-2 text-dark" href="{{ url_for('logout') }}" style="float:right;">Logout</a></li>
+        </ul>
         {% else %}
+        <ul>
           <li><a class="p-2 text-dark" href="{{ url_for('dash') }}">Dashboard</a></li>
           <li><a class="p-2 text-dark" href="/login">Log In/Register</a></li>
         </ul>

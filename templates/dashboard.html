@@ -13,12 +13,12 @@
 {% if post %}
     {% for part in post %}
     <div class="post">
-        <h3>{{part.title}} </h3>
-        <h5>by: {{part.username}} </h5>
-        <p>{{part.content}}</p>
-        <h6>{{part.date_posted}}</h6>
-
-
+        <h1>{{part.title}} </h1>
+        <div class="detail">
+        <p><span>By: </span>{{part.username}}</p>
+        <p><span>Published: </span>{{part.date_posted}}</p>
+        </div>
+        <p><span></span>{{part.content}}</p>
     </div>
     {% endfor %}
 {% else %}

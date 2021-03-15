@@ -13,14 +13,24 @@
 {% if data %}
     {% for part in data %}
         <div class="post">
-        <h3>{{part.title}} </h3>
-        <h5>by: {{part.username}} </h5>
-        <p>{{part.content}}</p>
-        <h6>{{part.date_posted}}</h6>
-
-        <a href="{{ url_for('blogedit',id=part.id) }}">EDIT POST</a>
-        <a href="{{ url_for('deleteblog',id=part.id) }}">DELETE POST</a>
-        <hr>
+        <h1>{{part.title}} </h1>
+              <div class="detail">
+        <p><span>By: </span>{{part.username}} </p>
+        <p><span>Published on: </span>{{part.date_posted}}</p>
+        </div>
+        <p><span></span>{{part.content}}</p>
+        <ul style="position: absolute; bottom: 0; background-color: white;">
+        <li><a  style=" background-color: #3333ff;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  text-transform: uppercase; border-radius: 10px;" href="{{ url_for('blogedit',id=part.id) }}">EDIT POST</a></li>
+        <li><a style='background-color: #3333ff;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  text-transform: uppercase; margin-left: 50px; border-radius: 10px;' href="{{ url_for('deleteblog',id=part.id) }}">DELETE POST</a></li>
+        </ul>
         </div>
     {% endfor %}
 
